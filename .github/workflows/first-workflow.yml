@@ -2,7 +2,7 @@ name: Manual Trigger with Inputs
  
 on:
 
-  workflow_dispatch:
+  push:
 
     inputs:
 
