@@ -1,13 +1,49 @@
-name: First Workflow
+name: Manual Trigger with Inputs
+ 
 on:
-  push: 
 
+  workflow_dispatch:
+
+    inputs:
+
+      name:
+
+        description: 'Your name'
+
+        required: true
+
+        default: 'Developer'
+
+      environment:
+
+        description: 'Deployment environment'
+
+        required: true
+
+        default: 'staging'
+
+        type: choice
+
+        options:
+
+          - staging
+
+          - production
+ 
 jobs:
-  job1:
+
+  greet-user:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Step 1
-        run: echo "Hello from First Workflow!"
-      
-      - name: Step 2
-        run: echo "First workflow is completing..."
+
+      - name: Print greeting
+
+        run: |
+
+          echo "Hello, ${{ github.event.inputs.name }}!"
+
+          echo "Deploying to the '${{ github.event.inputs.environment }}' environment."
+
+ 
